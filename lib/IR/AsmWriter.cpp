@@ -2332,7 +2332,8 @@ void AssemblyWriter::printModule(const Module *M) {
     Out << "; ModuleID = '" << M->getModuleIdentifier() << "'\n";
 
   if (!M->getSourceFileName().empty()) {
-    Out << "source_filename = \"";
+    Out << "; TODO(growly): Does commenting this out break anything?";
+    Out << "; source_filename = \"";
     PrintEscapedString(M->getSourceFileName(), Out);
     Out << "\"\n";
   }
