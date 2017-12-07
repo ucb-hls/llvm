@@ -390,7 +390,8 @@ def int_memcpy  : Intrinsic<[],
                              [llvm_anyptr_ty, llvm_anyptr_ty, llvm_anyint_ty,
                               llvm_i32_ty, llvm_i1_ty],
                             [IntrArgMemOnly, NoCapture<0>, NoCapture<1>,
-                             WriteOnly<0>, ReadOnly<1>]>;
+                             //WriteOnly<0>, ReadOnly<1>]>;
+                             ReadOnly<1>]>;
 def int_memmove : Intrinsic<[],
                             [llvm_anyptr_ty, llvm_anyptr_ty, llvm_anyint_ty,
                              llvm_i32_ty, llvm_i1_ty],
@@ -399,7 +400,8 @@ def int_memmove : Intrinsic<[],
 def int_memset  : Intrinsic<[],
                             [llvm_anyptr_ty, llvm_i8_ty, llvm_anyint_ty,
                              llvm_i32_ty, llvm_i1_ty],
-                            [IntrArgMemOnly, NoCapture<0>, WriteOnly<0>]>;
+                            //[IntrArgMemOnly, NoCapture<0>, WriteOnly<0>]>;
+                            [IntrArgMemOnly, NoCapture<0>]>;
 
 // FIXME: Add version of these floating point intrinsics which allow non-default
 // rounding modes and FP exception handling.
@@ -757,8 +759,9 @@ def int_coro_id : Intrinsic<[llvm_token_ty], [llvm_i32_ty, llvm_ptr_ty,
                             [IntrArgMemOnly, IntrReadMem,
                              ReadNone<1>, ReadOnly<2>, NoCapture<2>]>;
 def int_coro_alloc : Intrinsic<[llvm_i1_ty], [llvm_token_ty], []>;
-def int_coro_begin : Intrinsic<[llvm_ptr_ty], [llvm_token_ty, llvm_ptr_ty],
-                               [WriteOnly<1>]>;
+def int_coro_begin : Intrinsic<[llvm_ptr_ty], [llvm_token_ty, llvm_ptr_ty]
+                              >;
+                               //,[WriteOnly<1>]>;
 
 def int_coro_free : Intrinsic<[llvm_ptr_ty], [llvm_token_ty, llvm_ptr_ty],
                               [IntrReadMem, IntrArgMemOnly, ReadOnly<1>,
@@ -893,7 +896,8 @@ def int_memcpy_element_unordered_atomic
                   llvm_anyptr_ty, llvm_anyptr_ty, llvm_anyint_ty, llvm_i32_ty
                 ],
                 [
-                  IntrArgMemOnly, NoCapture<0>, NoCapture<1>, WriteOnly<0>,
+                  //IntrArgMemOnly, NoCapture<0>, NoCapture<1>, WriteOnly<0>,
+                  IntrArgMemOnly, NoCapture<0>, NoCapture<1>,
                   ReadOnly<1>
                 ]>;
 
@@ -904,14 +908,16 @@ def int_memmove_element_unordered_atomic
                   llvm_anyptr_ty, llvm_anyptr_ty, llvm_anyint_ty, llvm_i32_ty
                 ],
                 [
-                  IntrArgMemOnly, NoCapture<0>, NoCapture<1>, WriteOnly<0>,
+                  //IntrArgMemOnly, NoCapture<0>, NoCapture<1>, WriteOnly<0>,
+                  IntrArgMemOnly, NoCapture<0>, NoCapture<1>,
                   ReadOnly<1>
                 ]>;
 
 // @llvm.memset.element.unordered.atomic.*(dest, value, length, elementsize)
 def int_memset_element_unordered_atomic
     : Intrinsic<[], [ llvm_anyptr_ty, llvm_i8_ty, llvm_anyint_ty, llvm_i32_ty ],
-                [ IntrArgMemOnly, NoCapture<0>, WriteOnly<0> ]>;
+                //[ IntrArgMemOnly, NoCapture<0>, WriteOnly<0> ]>;
+                [ IntrArgMemOnly, NoCapture<0> ]>;
 
 //===------------------------ Reduction Intrinsics ------------------------===//
 //
